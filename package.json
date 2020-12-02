@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": false,
     "dependencies": {
+        "@amy-app/amy-app-js-sdk": "file:../AmI/projects/amy-app-js-sdk",
         "@material-ui/core": "latest",
         "@material-ui/icons": "latest",
         "@types/node": "latest",
@@ -35,7 +36,8 @@
         "@testing-library/react": "latest",
         "@testing-library/user-event": "latest",
         "@types/jest": "latest",
-        "typescript": "latest"
+        "typescript": "latest",
+        "web-vitals": "latest"
     },
     "scripts": {
         "start": "tsc -b && react-scripts start",
