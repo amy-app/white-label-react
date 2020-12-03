@@ -14,6 +14,10 @@ const renderFuncs: AmyRenderFuncs = {
     markdown: marked,
 };
 
-export default function (props: { text: string }) {
+export function InstructionRender(props: { text: string }) {
     return <AmyRender text={props.text} config={{ color: "black" }} renderFuncs={renderFuncs} />;
+}
+
+export function ExpressionRender(props: { text: string }) {
+    return <AmyRender text={props.text} config={{ color: "black", useBlockMath: true }} renderFuncs={renderFuncs} />;
 }

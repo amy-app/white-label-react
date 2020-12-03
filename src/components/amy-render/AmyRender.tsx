@@ -1,7 +1,6 @@
 import "katex/dist/katex.min.css";
 import * as React from "react";
 import * as ReactDOMServer from "react-dom/server";
-import { BlockMath, InlineMath } from "react-katex";
 import sanitizeHtml from "sanitize-html";
 import { AmyDiagram } from "./AmyDiagram";
 import AmyPlot from "./AmyPlot";
@@ -12,6 +11,7 @@ import {
     hasSymetricBrackets,
     InstructionSection,
 } from "./latexUtils";
+import "./markdownStyle.css";
 
 export interface Props {
     text: string; // The text that might include latex indicated with $[]$ signs
@@ -122,35 +122,22 @@ function mergeLatexTextIPositions(
     const { color, useBlockMath, ignoreGraphs } = config;
     const inParagraph = ignoreGraphs !== true;
 
-    openClosing.forEach((value, openCLosingindex) => {
+    openClosing.forEach((value, index) => {
         if (value.type === "latex") {
-            mdReadyText = mdReadyText.replace(`$[${value.text}]$`, `$[[nonMarkdown_${openCLosingindex}]]$`);
+            mdReadyText = mdReadyText.replace(`$[${value.text}]$`, `$[[nonMarkdown_${index}]]$`);
         }
     });
 
     mdReadyText = sanitizeHtml(renderers.markdown(mdReadyText));
 
-    openClosing.forEach((value, openCLosingindex) => {
+    openClosing.forEach((value, index) => {
         if (value.type === "latex") {
             let thisHTML: string = "";
-            if (useBlockMath) {
-                if (color !== undefined) {
-                    thisHTML = ReactDOMServer.renderToString(
-                        renderers.latex.block(openCLosingindex.toString(), `\\color{${color}}` + value.text),
-                    );
-                } else {
-                    thisHTML = ReactDOMServer.renderToString(<BlockMath key={openCLosingindex} math={value.text} />);
-                }
-            } else {
-                if (color !== undefined) {
-                    thisHTML = ReactDOMServer.renderToString(
-                        renderers.latex.inline(openCLosingindex.toString(), `\\color{${color}}` + value.text),
-                    );
-                } else {
-                    thisHTML = ReactDOMServer.renderToString(<InlineMath key={openCLosingindex} math={value.text} />);
-                }
-            }
-            mdReadyText = mdReadyText.replace(`$[[nonMarkdown_${openCLosingindex}]]$`, thisHTML);
+            const colorCode = color ? `\\color{${color}}` : "";
+            const renderFunc = useBlockMath ? renderers.latex.block : renderers.latex.inline;
+            thisHTML = ReactDOMServer.renderToString(renderFunc(index.toString(), colorCode + value.text));
+
+            mdReadyText = mdReadyText.replace(`$[[nonMarkdown_${index}]]$`, thisHTML);
         }
     });
 
@@ -167,7 +154,7 @@ function mergeLatexTextIPositions(
             <span
                 key={index}
                 className="amymarkdown"
-                // style={{ margin: "20px 0", display: "block" }}
+                style={{ margin: "20px 0", display: "block" }}
                 dangerouslySetInnerHTML={{ __html: mdReadyText }}
             />
         );

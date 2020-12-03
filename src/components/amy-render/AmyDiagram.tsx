@@ -122,7 +122,7 @@ export function AmyDiagram(props: Props) {
                 >
                     <AmyRender
                         renderFuncs={props.renderFuncs}
-                        config={{ color: "white" ? "white" : "black" }}
+                        config={{ color: props.config.color === "white" ? "white" : "black" }}
                         text={`$[${labelsObj[index].val}]$`}
                     />
                 </span>,

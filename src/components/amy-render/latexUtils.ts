@@ -10,7 +10,7 @@ export interface InstructionSection {
 }
 
 export interface AmyRenderConfig {
-    color?: string; // The color the latex should be, supports all Latex colors
+    color?: "white" | "black"; // The color the latex should be, supports all Latex colors
     ignoreGraphs?: boolean; // Ignores any graph notation so the output only shows plain text, diagrams and latex
     ignoreDiagrams?: boolean; // Ignores any diagram notation so the output only shows plain text, graphs and latex
     useBlockMath?: boolean; // Displays in blockMath mode, so displays on its own line and regular fonts on fractions
@@ -195,4 +195,43 @@ export function hasSymetricBrackets(latexifiedText: string) {
     }
 
     return true;
+}
+
+/**
+ * Fast and simple PRNG taken from: https://stackoverflow.com/a/47593316
+ * @param {*} a
+ * @return {*}
+ */
+export function mulberry32(a: number): Function {
+    return function () {
+        // eslint-disable-line no-param-reassign
+        let t = (a += 0x6d2b79f5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+
+/**
+ * O(n) Fisher–Yates shuffle. Copies and shuffles the input according to the seeded RNG random().
+ * Based on from: https://bost.ocks.org/mike/shuffle/
+ * @param {any[]} array
+ * @param {number} seed
+ * @return {*}
+ */
+export function shuffleArray<Type>(input: Type[], seed: number = 5): Type[] {
+    const array = input.slice();
+    let currentIndex: number = array.length,
+        randomIndex: number;
+    const random = mulberry32(seed);
+    // While there remain elements to shuffle ...
+    while (currentIndex) {
+        // Pick a remaining element…
+        randomIndex = Math.floor(random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
 }

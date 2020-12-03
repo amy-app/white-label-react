@@ -9,7 +9,7 @@ import { Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import DefaultRenderer from "../../components/amy-render/DefaultRenderer";
+import { ExpressionRender, InstructionRender } from "../../components/amy-render/DefaultRenderer";
 import { useAmyReady } from "../../tools/amyHooks";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,7 @@ export function Instruction({ inst }: { inst: string }) {
     return (
         <Grid container spacing={1} justify="flex-end" className={classes.instruction}>
             <Grid item xs={12}>
-                <DefaultRenderer text={inst} />
+                <InstructionRender text={inst} />
             </Grid>
         </Grid>
     );
@@ -59,7 +59,7 @@ export function Option({ optionRow }: { optionRow: OptionRow }) {
             <Grid container spacing={1} justify="flex-end" className={classes.correctOption}>
                 <Grid item xs={12}>
                     <Button disabled fullWidth={true}>
-                        <DefaultRenderer text={o?.text} />
+                        <ExpressionRender text={o?.text} />
                     </Button>
                 </Grid>
             </Grid>
@@ -72,7 +72,7 @@ export function Option({ optionRow }: { optionRow: OptionRow }) {
             <Grid container spacing={1} justify="flex-end" className={classes.incorrectOption}>
                 <Grid item xs={12}>
                     <Button disabled fullWidth={true}>
-                        <DefaultRenderer text={o?.text} />
+                        <ExpressionRender text={o?.text} />
                     </Button>
                 </Grid>
             </Grid>
@@ -92,7 +92,7 @@ export function Option({ optionRow }: { optionRow: OptionRow }) {
                                     o.select();
                                 }}
                             >
-                                <DefaultRenderer text={o?.text} />
+                                <ExpressionRender text={o?.text} />
                             </Button>
                         </Grid>
                     );

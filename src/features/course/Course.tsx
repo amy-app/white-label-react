@@ -1,8 +1,10 @@
 import { getAmy } from "@amy-app/amy-app-js-sdk";
 import { Role } from "@amy-app/amy-app-js-sdk/dist/src/Amy";
 import { Course, CourseAssignment, CourseSection } from "@amy-app/amy-app-js-sdk/dist/src/Course";
+
 import { Button, Grid, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
+
 import { useHistory } from "react-router-dom";
 import { useAmyReady } from "../../tools/amyHooks";
 

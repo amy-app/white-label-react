@@ -1,0 +1,39 @@
+.amymarkdown h1,
+.amymarkdown h2,
+.amymarkdown h3,
+.amymarkdown h4,
+.amymarkdown h5,
+.amymarkdown h6 {
+    margin-top: 7px;
+}
+
+.amymarkdown table {
+    border-collapse: collapse;
+    border: none;
+}
+
+.amymarkdown table,
+.amymarkdown th,
+.amymarkdown td {
+    border: 1px solid #ddd;
+}
+
+.amymarkdown th,
+.amymarkdown td {
+    padding: 4px 7px;
+    font-weight: normal;
+}
+
+.amymarkdown ul {
+    list-style: disc;
+    margin-block-start: 20px;
+    padding-left: 40px;
+}
+
+.amymarkdown ol {
+    margin-block-start: 20px;
+}
+
+.amymarkdown {
+    text-align: left !important;
+}

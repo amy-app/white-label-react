@@ -1,5 +1,5 @@
-import * as mathjs from "mathjs";
 import * as React from "react";
+import { mathjs } from "./customMathJSFunctions";
 import { AmyRenderFuncs } from "./latexUtils";
 
 export interface IProps {
