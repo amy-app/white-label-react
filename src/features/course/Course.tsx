@@ -1,7 +1,7 @@
 import { getAmy } from "@amy-app/amy-app-js-sdk";
 import { Role } from "@amy-app/amy-app-js-sdk/dist/src/Amy";
 import { Course, CourseAssignment, CourseSection } from "@amy-app/amy-app-js-sdk/dist/src/Course";
-import { Button, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAmyReady } from "../../tools/amyHooks";
@@ -37,13 +37,21 @@ export default function CoursePage() {
     // course.sections;
 
     return (
-        <>
-            {role.role}@:Course{role.courseId}
-            <Typography variant="h3">{course.name}</Typography>
+        <Grid container xs={12} spacing={4} style={{ padding: "20px 50px" }}>
+            <Grid item xs={12}>
+                <Typography align="center">
+                    {role.role}@:Course{role.courseId}
+                </Typography>
+            </Grid>
+            <Grid item xs={12} style={{ opacity: "0.5" }}>
+                <Typography variant="h5">
+                    {course.name} <hr />
+                </Typography>
+            </Grid>
             {course.sections.map((e) => (
                 <SectionTile section={e} key={e.id} />
             ))}
-        </>
+        </Grid>
     );
 }
 
@@ -59,6 +67,14 @@ function SectionTile({ section }: { section: CourseSection | CourseAssignment })
                         history.push(`/StudentAssignment/${studentAssignmentId}`);
                     });
                 }}
+                style={{
+                    backgroundColor: "white",
+                    borderTop: "4px solid #3f51b5",
+                    border: "1px solid #3f51b5",
+                    borderRadius: "4px",
+                    margin: "8px 8px 0 0",
+                    padding: "20px 150px 20px 20px",
+                }}
             >
                 {section.id}
             </Button>
@@ -66,15 +82,25 @@ function SectionTile({ section }: { section: CourseSection | CourseAssignment })
     }
 
     if (section.sections.length === 0) {
-        return <>CourseSection: {section.id}</>;
+        return (
+            <Grid item xs={12}>
+                CourseSection: {section.id}
+            </Grid>
+        );
     }
 
     return (
-        <>
-            CourseSection: {section.id} <hr />
+        <Grid item xs={12} container>
+            <Grid item xs={12}>
+                <Typography variant="h6">
+                    CourseSection: {section.id} <hr />
+                </Typography>
+            </Grid>
             {section.sections.map((e) => (
-                <SectionTile section={e} key={e.id} />
-            ))}
-        </>
+                <Grid item xs={e instanceof CourseSection ? 12 : "auto"}>
+                    <SectionTile section={e} key={e.id} />
+                </Grid>
+            )) || <div>Hello</div>}
+        </Grid>
     );
 }
