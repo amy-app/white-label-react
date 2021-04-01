@@ -57,7 +57,6 @@ ReactDOM.render(
             logoSrc={"/logo512.png"}
             login={<AuthSpace />}
             theme={theme}
-            title={<img src="/logo512.png" style={{ height: "20px" }} />}
         />
     </React.StrictMode>,
     document.getElementById("root"),
@@ -80,7 +79,7 @@ function AuthSpace() {
                 disabled={!token}
                 onClick={() => {
                     // sign in
-                    Amy.signInViaToken({ token }).then(() => {
+                    Amy.get().signInViaToken({ token }).then(() => {
                         console.log("Amy is logged in. Wait for the magic to happen!");
                     });
                 }}
