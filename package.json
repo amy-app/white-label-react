@@ -23,6 +23,7 @@
         "react-firebase-hooks": "latest",
         "react-router-dom": "latest",
         "react-scripts": "latest",
+        "react-social-login-buttons": "^3.4.0",
         "sanitize-html": "latest",
         "web-vitals": "latest"
     },
@@ -45,11 +46,13 @@
     },
     "scripts": {
         "start": "tsc -b && react-scripts start",
+        "https-start": "HTTPS=true npm start",
         "build": "tsc -b && react-scripts build",
         "test": "jest",
         "eject": "react-scripts eject",
         "publish:gh": "cross-var echo $npm_package_name has no publish:gh",
-        "reset": "shx rm -f yarn.lock && shx rm -rf build && shx rm -rf node_modules"
+        "reset": "shx rm -f yarn.lock && shx rm -rf build && shx rm -rf node_modules",
+        "deploy": "surge build/ --domain https://pathways-amy.surge.sh"
     },
     "eslintConfig": {
         "extends": [

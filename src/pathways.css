@@ -1,0 +1,51 @@
+button.MuiButtonBase-root.green,
+.logged-out .MuiButton-outlinedSecondary {
+  background-color: rgb(0, 121, 52);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.2);
+  height: 50px;
+  letter-spacing: .0892857143em;
+}
+
+button.MuiButtonBase-root.green,
+button.MuiButtonBase-root.green:hover,
+.logged-out .MuiButton-outlinedSecondary,
+.logged-out .MuiButton-outlinedSecondary:hover {
+  border-color: rgb(0, 121, 52);
+  color: white;
+  border: none;
+}
+
+button.MuiButtonBase-root.green:hover,
+.logged-out .MuiButton-outlinedSecondary:hover {
+  background-color: rgb(0, 121, 52, 0.9);
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-width: 1px!important;
+}
+
+.logged-out .MuiCard-root {
+  padding: 5px!important;
+  border-radius: 0!important;
+  box-shadow: none;
+  width: 480px!important;
+  max-width: 80%;
+}
+
+.sign-in-form .MuiFormControl-root {
+  margin-bottom: 30px;
+}
+
+.sign-in-form button {
+  margin: 10px 0!important;
+  width: 100%!important;
+}
+
+img.logo {
+  z-index: 3000;
+}
+
+.MuiAppBar-positionFixed .MuiToolbar-root {
+  margin-left: 160px;
+}
